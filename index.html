@@ -1053,7 +1053,10 @@
                     <label>Password</label>
                     <input type="password" id="citizenPass" class="form-input" placeholder="Enter password (citizen123)">
                 </div>
-                <button class="btn btn-blue" id="citizenLoginBtn">Enter as Citizen</button>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <button class="btn btn-blue" id="citizenLoginBtn" style="flex: 1;">Login</button>
+                    <button class="btn btn-outline" id="citizenRegisterBtn" style="flex: 1; min-width: 0; background: white; color: var(--primary-blue); border: 1.5px solid var(--primary-blue); padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;">Register</button>
+                </div>
                 <div id="citizenLoginError" class="login-error">Invalid username or password.</div>
                 <p class="subtext" style="margin-top: 24px; font-size: 11px;">New here? Complaints are secure.</p>
             </div>
@@ -1072,7 +1075,10 @@
                     <label>Admin Password</label>
                     <input type="password" id="adminPass" class="form-input" placeholder="Admin password">
                 </div>
-                <button class="btn btn-green" style="background: var(--primary-purple)" id="adminLoginBtn">Enter as Admin</button>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <button class="btn btn-green" style="background: var(--primary-purple); flex: 1;" id="adminLoginBtn">Login</button>
+                    <button class="btn btn-outline" id="adminRegisterBtn" style="flex: 1; min-width: 0; background: white; color: var(--primary-purple); border: 1.5px solid var(--primary-purple); padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;">Register</button>
+                </div>
                 <div id="adminLoginError" class="login-error">Invalid username or password.</div>
                 <p class="subtext" style="margin-top: 24px; font-size: 11px;">Management & Resolution Dashboard.</p>
             </div>
@@ -1531,18 +1537,6 @@
         const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
         // --- Config & Auth ---
-        const CREDENTIALS = {
-            citizen: [
-                { user: "citizen", pass: "citizen123" },
-                { user: "user1", pass: "pass123" },
-                { user: "user2", pass: "pass456" }
-            ],
-            admin: [
-                { user: "admin", pass: "admin@123" },
-                { user: "superadmin", pass: "super@456" }
-            ]
-        };
-
         let currentUser = JSON.parse(sessionStorage.getItem('complaint_session'));
 
         // --- UI View References ---
@@ -1669,37 +1663,56 @@
         }
 
         // --- Login Handlers ---
-        document.getElementById('citizenLoginBtn').onclick = () => {
-            const user = document.getElementById('citizenUser').value.trim();
-            const pass = document.getElementById('citizenPass').value.trim();
-            const found = CREDENTIALS.citizen.find(c => c.user === user && c.pass === pass);
-            
-            if (found) {
-                currentUser = { role: 'citizen', username: found.user, loginTime: Date.now() };
-                sessionStorage.setItem('complaint_session', JSON.stringify(currentUser));
-                initSession();
-            } else {
-                showLoginError('citizen');
-            }
-        };
+        document.getElementById('citizenLoginBtn').onclick = () => handleAuth('citizen', 'login');
+        document.getElementById('citizenRegisterBtn').onclick = () => handleAuth('citizen', 'register');
+        document.getElementById('adminLoginBtn').onclick = () => handleAuth('admin', 'login');
+        document.getElementById('adminRegisterBtn').onclick = () => handleAuth('admin', 'register');
 
-        document.getElementById('adminLoginBtn').onclick = () => {
-            const user = document.getElementById('adminUser').value.trim();
-            const pass = document.getElementById('adminPass').value.trim();
-            const found = CREDENTIALS.admin.find(c => c.user === user && c.pass === pass);
+        async function handleAuth(role, mode) {
+            const userField = role === 'citizen' ? 'citizenUser' : 'adminUser';
+            const passField = role === 'citizen' ? 'citizenPass' : 'adminPass';
+            const username = document.getElementById(userField).value.trim();
+            const password = document.getElementById(passField).value.trim();
             
-            if (found) {
-                currentUser = { role: 'admin', username: found.user, loginTime: Date.now() };
-                sessionStorage.setItem('complaint_session', JSON.stringify(currentUser));
-                initSession();
-            } else {
-                showLoginError('admin');
+            if (!username || !password) {
+                showLoginError(role, "Enter username & password");
+                return;
             }
-        };
 
-        function showLoginError(type) {
+            console.log(`Auth request: ${mode} as ${role} for user ${username}`);
+
+            try {
+                const response = await fetch(`/api/${mode}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role })
+                });
+
+                const data = await response.json();
+                console.log("Auth response:", data);
+
+                if (response.ok) {
+                    if (mode === 'login') {
+                        currentUser = { role: data.user.role, username: data.user.username, loginTime: Date.now() };
+                        sessionStorage.setItem('complaint_session', JSON.stringify(currentUser));
+                        initSession();
+                    } else {
+                        alert("User registered! Now please login.");
+                        document.getElementById(role + 'LoginError').style.display = 'none';
+                    }
+                } else {
+                    showLoginError(role, data.message || "Auth failed");
+                }
+            } catch (err) {
+                console.error("Auth error:", err);
+                showLoginError(role, "Server connection failed");
+            }
+        }
+
+        function showLoginError(type, message) {
             const err = document.getElementById(type + 'LoginError');
             const card = document.getElementById(type + 'Card');
+            err.textContent = message || "Invalid username or password.";
             err.style.display = 'block';
             card.classList.add('shake');
             setTimeout(() => {
