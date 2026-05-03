@@ -1,0 +1,6 @@
+{
+  "name": "Autonomous Task Agent",
+  "description": "An AI agent that thinks, plans, and acts to deliver results using the THINK-PLAN-ACT loop.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

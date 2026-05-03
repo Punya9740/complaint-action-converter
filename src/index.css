@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --bg: #0A0A0A;
+  --fg: #FFFFFF;
+  --accent: #22C55E;
+  --surface: #1A1A1A;
+  --border: #333333;
+  --f-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg)] text-[var(--fg)] font-sans selection:bg-[var(--accent)] selection:text-black;
+  }
+}
+
+.huge-text {
+  @apply text-[110px] font-extrabold leading-[0.85] tracking-[-0.04em] uppercase;
+}
+
+.label-tiny {
+  @apply text-[10px] uppercase tracking-[0.15em] text-[#888] font-bold;
+}
+
+.terminal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.activity-gradient {
+  background: linear-gradient(135deg, #0A0A0A 0%, #111111 100%);
+}
+
+.pulse-accent {
+  @apply relative;
+}
+
+.pulse-accent::after {
+  content: '';
+  @apply absolute -left-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-[var(--accent)] rounded-full;
+  box-shadow: 0 0 10px var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-50%) scale(1); opacity: 1; }
+  50% { transform: translateY(-50%) scale(1.5); opacity: 0.5; }
+  100% { transform: translateY(-50%) scale(1); opacity: 1; }
+}
