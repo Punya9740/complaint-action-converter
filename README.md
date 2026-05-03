@@ -22,7 +22,7 @@ The Complaint to Action Converter is an AI-powered tool designed for civic autho
 
 ### Tech Stack
 - HTML5, CSS3, Vanilla JavaScript
-- Anthropic Claude API (claude-sonnet-4-20250514)
+- Google Gemini API (gemini-3-flash-preview)
 - No frameworks, no dependencies, single file
 
 ### Setup
@@ -30,14 +30,9 @@ The Complaint to Action Converter is an AI-powered tool designed for civic autho
    ```bash
    git clone https://github.com/your-username/complaint-action-converter.git
    ```
-2. **Add API Key**:
-   Create a `.env` file in the root directory.
-3. **Configure API**:
-   Add your Anthropic API key to the `.env` file.
-   ```env
-   ANTHROPIC_API_KEY="your-anthropic-api-key-here"
-   ```
-4. **Install and Run**:
+2. **Configure API**:
+   The application uses the `GEMINI_API_KEY` environment variable. In AI Studio, this is pre-configured.
+3. **Install and Run**:
    ```bash
    npm install
    npm run dev
@@ -45,10 +40,12 @@ The Complaint to Action Converter is an AI-powered tool designed for civic autho
    Open `http://localhost:3000` in your browser.
 
 ### API Configuration
-To use this application, you must have an active Anthropic account.
-1. Sign up/log in at [console.anthropic.com](https://console.anthropic.com/).
-2. Generate a new API Key from the Dashboard.
-3. Set the key in your environment variables as `ANTHROPIC_API_KEY`.
+The application is optimized for Google AI Studio. It uses the `@google/genai` SDK to communicate with the **Gemini 3.5 Flash** model. No manual key entry is required when running within the AI Studio environment.
+
+### Advanced Features
+- **Location Intelligence**: Integrated with the OpenStreetMap Nominatim API for one-click reverse geocoding.
+- **Persistence Layer**: LocalStorage-based history tracking that maintains the last 50 submissions.
+- **Auto-Escalation Engine**: A client-side logic layer that automatically upgrades priority to **Critical** if multiple similar complaints are detected in the same area within 30 days.
 
 ### Example Complaints to Try
 - **Road Systems**: "Huge pothole on Oak Street right outside the elementary school. It's causing cars to swerve into the bike lane and was nearly hit by a bus this morning."

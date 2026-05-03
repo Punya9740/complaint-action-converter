@@ -1,6 +1,8 @@
 {
-  "name": "Autonomous Task Agent",
-  "description": "An AI agent that thinks, plans, and acts to deliver results using the THINK-PLAN-ACT loop.",
-  "requestFramePermissions": [],
+  "name": "Complaint to Action Converter",
+  "description": "AI-powered tool that transforms raw civic complaints into structured task blueprints with priority and location tagging.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
   "majorCapabilities": []
 }

@@ -419,6 +419,247 @@
 
         .arrow { color: #d1d5db; font-size: 18px; }
 
+        /* Dashboard Styles */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #f3f4f6;
+            text-align: center;
+        }
+
+        .stat-value { font-size: 20px; font-weight: 700; display: block; }
+        .stat-label { font-size: 10px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+        .stat-pending { color: var(--primary-blue); }
+        .stat-overdue { color: #ef4444; }
+        .stat-resolved { color: var(--primary-green); }
+
+        /* Timeline Styles */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f3f4f6;
+            z-index: 0;
+        }
+
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            z-index: 1;
+            width: 60px;
+        }
+
+        .step-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e5e7eb;
+        }
+
+        .step-dot.active { background: var(--primary-blue); border-color: var(--primary-blue); }
+        .step-dot.overdue { background: #ef4444; border-color: #ef4444; }
+        .step-label { font-size: 9px; color: var(--text-gray); font-weight: 600; text-align: center; }
+
+        /* Action Footer */
+        .result-footer {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-success { background: var(--primary-green); color: white; border: none; }
+        .btn-email { background: #6366f1; color: white; border: none; }
+
+        .resolved-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Feature 4: Photo Upload Styles */
+        .photo-upload-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #d1d5db;
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary-blue);
+            background: #eff6ff;
+        }
+
+        .upload-icon { font-size: 40px; margin-bottom: 4px; }
+        .upload-text { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+        .upload-subtext { font-size: 12px; color: var(--text-gray); }
+
+        .upload-preview {
+            position: relative;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .preview-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .preview-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .btn-remove-photo {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .attach-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        /* Photo Analysis Styles */
+        .photo-analysis-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .analysis-photo {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .analysis-grid {
+            display: grid;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .analysis-item { display: flex; flex-direction: column; gap: 2px; }
+        .analysis-label { font-weight: 700; color: var(--text-dark); font-size: 11px; text-transform: uppercase; }
+        .analysis-value { color: var(--text-gray); }
+
+        .validation-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .badge-match { background: #dcfce7; color: #166534; }
+        .badge-mismatch { background: #ffedd5; color: #9a3412; }
+
+        .boost-notice {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .confidence-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+        }
+        .conf-high { background: var(--primary-green); }
+        .conf-medium { background: var(--priority-medium); }
+        .conf-low { background: var(--priority-high); }
+
+        .history-card-body { display: flex; gap: 12px; }
+        .history-thumb {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid #e5e7eb;
+        }
+        .history-main { flex: 1; min-width: 0; }
+
         /* Utilities */
         .spinner {
             width: 16px;
@@ -437,36 +678,523 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* Feature 2: Location Styles */
+        .location-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .input-group {
+            position: relative;
+            flex: 1;
+        }
+
+        .location-input {
+            width: 100%;
+            padding: 10px 32px 10px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .location-check {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-green);
+            display: none;
+        }
+
+        .btn-location {
+            padding: 10px;
+            background: var(--bg-blue);
+            color: var(--primary-blue);
+            border: 1px solid var(--border-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .btn-location:hover {
+            background: #dbeafe;
+        }
+
+        /* Feature 1: History Styles */
+        .history-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        .history-panel {
+            margin-top: 24px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .history-panel.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .btn-clear {
+            font-size: 12px;
+            color: var(--priority-high);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .history-card {
+            background: var(--page-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .history-card:hover {
+            border-color: var(--border-blue);
+            transform: scale(1.02);
+        }
+
+        .history-card-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .history-card-content {
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .history-card-pills {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .history-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 11px;
+            border-radius: 6px;
+        }
+
+        .btn-view { background: var(--primary-blue); color: white; border: none; }
+        .btn-delete { background: #fee2e2; color: #ef4444; border: none; }
+
+        /* Feature 3: Escalation Styles */
+        .escalation-banner {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .escalation-icon { font-size: 24px; }
+        .escalation-content h4 { font-size: 14px; color: #991b1b; margin-bottom: 2px; }
+        .escalation-content p { font-size: 12px; color: #b91c1c; }
+
+        .flame-icon { color: #f59e0b; margin-left: 4px; }
+
+        .priority-critical { background-color: #000 !important; color: white !important; }
+        .priority-high { background-color: var(--priority-high) !important; color: white !important; }
+        .priority-medium { background-color: var(--priority-medium) !important; color: white !important; }
+        .priority-low { background-color: var(--priority-low) !important; color: white !important; }
+
+        .location-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-top: 4px;
+        }
+
+        /* --- New Portal Styles --- */
+        [id$="Portal"], #loginScreen { display: none; }
+        .visible-view { display: block !important; }
+        .flex-view { display: flex !important; }
+
+        /* Login Screen */
+        #loginScreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--page-bg);
+            padding: 20px;
+        }
+
+        .login-card-container {
+            display: flex;
+            gap: 24px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .login-card {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .login-card:hover { transform: translateY(-5px); }
+        .login-citizen { background: var(--bg-blue); border-color: var(--primary-blue); }
+        .login-admin { background: var(--bg-purple); border-color: var(--primary-purple); }
+
+        .login-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+        .login-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        .login-subtitle { font-size: 14px; color: var(--text-gray); margin-bottom: 30px; }
+
+        .form-group { text-align: left; margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; color: var(--text-gray); }
+        .form-input { width: 100%; padding: 12px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 14px; transition: border-color 0.2s; }
+        .form-input:focus { border-color: var(--primary-blue); outline: none; }
+
+        .login-error { color: #ef4444; font-size: 12px; margin-top: 12px; font-weight: 600; display: none; }
+        .shake { animation: shake 0.4s ease-in-out; }
+
+        /* Portal Headers */
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 16px 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .user-badge { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
+        .portal-badge { padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+        .badge-citizen { background: var(--bg-blue); color: var(--primary-blue); }
+        .badge-admin { background: var(--bg-purple); color: var(--primary-purple); }
+
+        .btn-logout { background: #fee2e2; color: #ef4444; border: none; padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+        /* Admin Dashboard */
+        .admin-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .admin-stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .admin-stat-card.active { border-color: var(--text-dark); background: #f8fafc; }
+        .admin-stat-value { font-size: 24px; font-weight: 800; display: block; margin-bottom: 4px; }
+        .admin-stat-label { font-size: 11px; font-weight: 700; color: var(--text-gray); text-transform: uppercase; }
+
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+        .admin-table th { background: #f8fafc; padding: 16px; font-weight: 700; color: var(--text-gray); text-transform: uppercase; font-size: 11px; border-bottom: 1px solid #e5e7eb; }
+        .admin-table td { padding: 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+        .admin-table tr:hover { background: #f5f3ff; cursor: pointer; }
+
+        .status-badge { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 11px; padding: 4px 10px; border-radius: 99px; width: fit-content; }
+        .badge-pending { background: #eff6ff; color: #2563eb; }
+        .badge-escalated { background: #fef2f2; color: #dc2626; }
+        .badge-resolved { background: #f0fdf4; color: #16a34a; }
+        .badge-overdue { background: #fff7ed; color: #ea580c; }
+
+        /* Detail Panel */
+        .detail-panel-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .detail-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .detail-panel.active { right: 0; }
+
+        .panel-close { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-gray); }
+
+        .admin-actions-box { background: #f8fafc; border-radius: 12px; padding: 20px; margin-top: 24px; border: 1px solid #e2e8f0; }
+        .admin-actions-box h3 { font-size: 14px; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; color: var(--text-dark); }
+
+        .pulse { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Tracking & Stats for Citizen */
+        .citizen-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .track-box { display: flex; gap: 8px; margin-bottom: 16px; }
+        .track-input { flex: 1; padding: 8px 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 13px; }
+
+        @media (max-width: 1024px) {
+            .login-card-container { flex-direction: column; align-items: center; }
+            .detail-panel { width: 100%; right: -100%; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Complaint to Action Converter – AI Agent</h1>
-        </header>
-
-        <div class="main-grid">
-            <!-- Left Panel -->
-            <div class="card card-left">
-                <div class="section-header">
-                    <div class="icon-circle bg-blue">i</div>
-                    <h2 class="section-title text-blue">1. Complaint Input</h2>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="visible-view">
+        <div class="login-card-container">
+            <!-- Citizen Card -->
+            <div class="login-card login-citizen" id="citizenCard">
+                <span class="login-icon">👤</span>
+                <h2 class="login-title">Citizen Login</h2>
+                <p class="login-subtitle">Submit and track your civic complaints.</p>
+                
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="citizenUser" class="form-input" placeholder="Enter your name">
                 </div>
-                <p class="subtext">Enter a complaint in your own words.</p>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="citizenPass" class="form-input" placeholder="Enter password (citizen123)">
+                </div>
+                <button class="btn btn-blue" id="citizenLoginBtn">Enter as Citizen</button>
+                <div id="citizenLoginError" class="login-error">Invalid username or password.</div>
+                <p class="subtext" style="margin-top: 24px; font-size: 11px;">New here? Complaints are secure.</p>
+            </div>
+
+            <!-- Admin Card -->
+            <div class="login-card login-admin" id="adminCard">
+                <span class="login-icon">🛡️</span>
+                <h2 class="login-title">Admin Login</h2>
+                <p class="login-subtitle">Authorized municipal personnel only.</p>
+                
+                <div class="form-group">
+                    <label>Admin Username</label>
+                    <input type="text" id="adminUser" class="form-input" placeholder="Admin ID">
+                </div>
+                <div class="form-group">
+                    <label>Admin Password</label>
+                    <input type="password" id="adminPass" class="form-input" placeholder="Admin password">
+                </div>
+                <button class="btn btn-green" style="background: var(--primary-purple)" id="adminLoginBtn">Enter as Admin</button>
+                <div id="adminLoginError" class="login-error">Invalid username or password.</div>
+                <p class="subtext" style="margin-top: 24px; font-size: 11px;">Management & Resolution Dashboard.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Citizen Portal -->
+    <div id="citizenPortal">
+        <div class="container" style="max-width: 1400px;">
+            <div class="portal-header">
+                <div class="header-left">
+                    <span style="font-size: 24px;">🏛️</span>
+                    <div>
+                        <h1 style="font-size: 18px; font-weight: 800;">Citizen Watch</h1>
+                        <span class="portal-badge badge-citizen">Citizen Portal</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-badge">
+                        <span>👤</span>
+                        <span id="citizenName">User</span>
+                    </div>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="main-grid">
+                <!-- Left Panel -->
+                <div class="card card-left">
+                    <div class="section-header">
+                        <div class="icon-circle bg-blue">i</div>
+                        <h2 class="section-title text-blue">1. Complaint Input</h2>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <span class="stat-value stat-pending" id="countPending">0</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value stat-overdue" id="countOverdue">0</span>
+                            <span class="stat-label">Overdue</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value stat-resolved" id="countResolved">0</span>
+                            <span class="stat-label">Resolved</span>
+                        </div>
+                    </div>
                 
                 <textarea id="complaintInput" placeholder="Describe the issue here..." maxlength="500"></textarea>
                 <div class="char-count" id="charCount">0/500</div>
+
+                <div class="photo-upload-wrapper">
+                    <label class="section-title text-blue" style="font-size: 13px; display: block; margin-bottom: 8px;">📷 Attach Photo Evidence (Optional)</label>
+                    <div id="uploadArea" class="upload-area">
+                        <span class="upload-icon">📷</span>
+                        <span class="upload-text">Drag & drop a photo here</span>
+                        <span class="upload-subtext">or click to browse (Max 5MB)</span>
+                    </div>
+                    <div id="uploadPreview" class="upload-preview">
+                        <button id="removePhotoBtn" class="btn-remove-photo">✕</button>
+                        <img id="previewImg" class="preview-img" src="" alt="Preview">
+                        <div class="preview-info">
+                            <span id="fileName" style="font-weight: 600; color: var(--text-dark);">image.jpg</span>
+                            <span class="attach-badge">✅ Photo attached</span>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+                </div>
+
+                <div class="location-row">
+                    <div class="input-group">
+                        <input type="text" id="locationInput" class="location-input" placeholder="Enter street, area, or landmark">
+                        <span class="location-check" id="locationCheck">✔️</span>
+                    </div>
+                    <button class="btn-location" id="useLocationBtn" title="Use My Location">📍</button>
+                </div>
                 
-                <button class="btn btn-blue" id="analyzeBtn">
-                    <span id="btnIcon">✈️</span>
-                    <span id="btnText">Analyze Complaint</span>
-                </button>
+                <div class="history-controls">
+                    <button class="btn btn-blue" id="analyzeBtn">
+                        <span id="btnIcon">✈️</span>
+                        <span id="btnText">Analyze Complaint</span>
+                    </button>
+                    <button class="btn btn-outline" id="toggleHistoryBtn" title="View past complaints">🕒</button>
+                </div>
                 
                 <div id="errorBox" class="error-msg"></div>
+
+                <div class="history-panel" id="historyPanel">
+                    <div class="history-header">
+                        <h3 class="section-title">Complaint History</h3>
+                        <button class="btn-clear" id="clearHistoryBtn">Clear All</button>
+                    </div>
+                    <div id="historyList">
+                        <!-- History items go here -->
+                        <p class="subtext" style="text-align: center; margin-top: 20px;">No complaints submitted yet.</p>
+                    </div>
+                </div>
 
                 <div class="tip-box">
                     <span>💡</span>
                     <span>Provide as much detail as possible for better results.</span>
+                </div>
+
+                <div class="track-box" style="margin-top: 24px;">
+                    <input type="text" id="trackInput" class="track-input" placeholder="CMP-YYYY-MMDD-XXXX">
+                    <button class="btn btn-blue btn-sm" style="width: auto;" id="trackBtn">Track By ID</button>
+                </div>
+
+                <div class="citizen-stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value" id="myTotalCmp" style="color: var(--text-dark)">0</span>
+                        <span class="stat-label">My Total</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="myResolvedCmp" style="color: var(--primary-green)">0</span>
+                        <span class="stat-label">Resolved</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="avgResTime" style="color: var(--primary-purple)">0</span>
+                        <span class="stat-label">Avg Days</span>
+                    </div>
                 </div>
             </div>
 
@@ -506,11 +1234,82 @@
 
             <!-- Right Panel -->
             <div class="card card-right" id="resultPanel">
+                <div class="escalation-banner" id="escalationBanner">
+                    <div class="escalation-icon">⚠️</div>
+                    <div class="escalation-content">
+                        <h4>Escalated Issue</h4>
+                        <p id="escalationText"></p>
+                    </div>
+                </div>
+
                 <div class="section-header">
                     <div class="icon-circle bg-green">i</div>
                     <h2 class="section-title text-green">2. Analysis Result</h2>
+                    <span id="resolvedBadge" class="resolved-badge" style="display:none; margin-left: auto;">Resolved</span>
                 </div>
-                <p class="subtext">Structured output ready for action.</p>
+
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="step-dot active"></div>
+                        <span class="step-label">Submitted</span>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-dot active"></div>
+                        <span class="step-label">Analyzed</span>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-dot" id="timelineEscalated"></div>
+                        <span class="step-label">Escalated</span>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-dot" id="timelineResolved"></div>
+                        <span class="step-label">Resolved</span>
+                    </div>
+                </div>
+
+                <div id="photoAnalysisSection" class="photo-analysis-section">
+                    <div class="label-group">
+                        <span style="color: var(--primary-blue)">📷</span>
+                        <span>Photo Evidence Analysis</span>
+                    </div>
+                    <img id="resultPhoto" class="analysis-photo" src="" alt="Evidence">
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <span class="analysis-label">Issue Detected</span>
+                            <span id="photoIssue" class="analysis-value">...</span>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">Visual Severity</span>
+                            <div id="photoSeverity" class="pill pill-priority" style="padding: 2px 8px; font-size: 11px;">High</div>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">Visual Evidence</span>
+                            <span id="photoEvidence" class="analysis-value">...</span>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">Confidence</span>
+                            <div style="margin-top: 4px;">
+                                <span id="photoConfidence" class="confidence-pill conf-high">High</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="validationBadge" class="validation-badge">
+                        <span id="validationIcon">✅</span>
+                        <div style="display: flex; flex-direction: column;">
+                            <span id="validationTitle">Photo validates complaint</span>
+                            <span id="validationSubtext" style="font-size: 10px; font-weight: normal; opacity: 0.9;">Visual evidence matches reported issue</span>
+                        </div>
+                    </div>
+
+                    <div id="boostNotice" class="boost-notice" style="display: none;">
+                        <span>📸</span>
+                        <div>
+                            <span style="font-weight: 700; display: block;">Priority boosted based on visual evidence</span>
+                            <span>Photo analysis indicates a more severe issue than described.</span>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="result-section">
                     <div class="label-group">
@@ -518,6 +1317,9 @@
                         <span>Category</span>
                     </div>
                     <div class="pill pill-waste" id="resultCategory">Waste Management</div>
+                    <div class="location-display" id="resultLocationRow">
+                        📍 <span id="resultLocation">No location specified</span>
+                    </div>
                 </div>
 
                 <div class="result-section">
@@ -538,17 +1340,12 @@
                     </div>
                     <ul class="action-list" id="resultActions">
                         <li data-index="1. ">Notify the sanitation department</li>
-                        <li data-index="2. ">Schedule immediate garbage collection</li>
-                        <li data-index="3. ">Inspect the area for cleanliness</li>
-                        <li data-index="4. ">Monitor the area regularly</li>
                     </ul>
                 </div>
 
-                <div class="footer-ready">
-                    <div class="ready-text">
-                        <span>✔️</span> Ready to Act!
-                    </div>
-                    <p class="subtext" style="margin-top: 4px;">This complaint has been converted into actionable steps.</p>
+                <div class="result-footer">
+                    <button class="btn btn-success" id="resolveBtn">Mark as Resolved</button>
+                    <button class="btn btn-email" id="emailBtn">Draft Escalation Email</button>
                 </div>
             </div>
         </div>
@@ -586,12 +1383,176 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
-    <script>
-        // Analysis is performed server-side via /api/analyze to avoid CORS issues
-        // Ensure ANTHROPIC_API_KEY is set in your environment variables.
+    <!-- Admin Portal -->
+    <div id="adminPortal">
+        <div class="container" style="max-width: 1400px;">
+            <div class="portal-header">
+                <div class="header-left">
+                    <span style="font-size: 24px;">🏛️</span>
+                    <div>
+                        <h1 style="font-size: 18px; font-weight: 800;">Command Center</h1>
+                        <span class="portal-badge badge-admin">Admin Portal</span>
+                    </div>
+                </div>
+                <div class="header-rights" style="display: flex; align-items: center; gap: 20px;">
+                    <div class="user-badge">
+                        <span>🛡️</span>
+                        <span id="adminName">Admin</span>
+                    </div>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
 
+            <!-- Stats Bar -->
+            <div class="admin-stats-bar">
+                <div class="admin-stat-card active" data-filter="all">
+                    <span class="admin-stat-value" id="adminTotal">0</span>
+                    <span class="admin-stat-label">Total Complaints</span>
+                </div>
+                <div class="admin-stat-card" data-filter="pending">
+                    <span class="admin-stat-value" id="adminPending" style="color: var(--primary-blue)">0</span>
+                    <span class="admin-stat-label">Pending</span>
+                </div>
+                <div class="admin-stat-card" data-filter="overdue">
+                    <span class="admin-stat-value" id="adminOverdue" style="color: #f97316">0</span>
+                    <span class="admin-stat-label">Overdue</span>
+                </div>
+                <div class="admin-stat-card" data-filter="escalated">
+                    <span class="admin-stat-value" id="adminEscalated" style="color: #ef4444">0</span>
+                    <span class="admin-stat-label">Escalated</span>
+                </div>
+                <div class="admin-stat-card" data-filter="critical">
+                    <span class="admin-stat-value pulse" id="adminCritical" style="color: #000">0</span>
+                    <span class="admin-stat-label">Emergency</span>
+                </div>
+                <div class="admin-stat-card" data-filter="resolved">
+                    <span class="admin-stat-value" id="adminResolved" style="color: var(--primary-green)">0</span>
+                    <span class="admin-stat-label">Resolved</span>
+                </div>
+            </div>
+
+            <!-- Filter & Search Bar -->
+            <div class="card" style="margin-bottom: 24px; padding: 16px;">
+                <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="adminSearch" class="form-input" style="flex: 1; min-width: 200px;" placeholder="Search ID, category, location...">
+                    <select id="filterCategory" class="form-input" style="width: auto;">
+                        <option value="all">All Categories</option>
+                        <option value="Waste Management">Waste Management</option>
+                        <option value="Roads & Transport">Roads & Transport</option>
+                        <option value="Water Supply">Water Supply</option>
+                        <option value="Electricity">Electricity</option>
+                        <option value="Public Health">Public Health</option>
+                    </select>
+                    <select id="filterPriority" class="form-input" style="width: auto;">
+                        <option value="all">All Priorities</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <button class="btn btn-outline btn-sm" id="resetFilters" style="width: auto;">Reset All</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table class="admin-table" id="complaintsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Complaint ID</th>
+                            <th>Citizen</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Days Open</th>
+                            <th>Photo</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Panel Overlay -->
+    <div id="detailPanelOverlay" class="detail-panel-overlay"></div>
+    <div id="detailPanel" class="detail-panel">
+        <span class="panel-close" id="closeDetail">&times;</span>
+        <div id="detailContent">
+            <!-- Content injected via JS -->
+        </div>
+        
+        <div class="admin-actions-box">
+            <h3>Admin Actions</h3>
+            <div class="form-group">
+                <label>Update Status</label>
+                <select id="updateStatusSelect" class="form-input">
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="escalated">Escalated</option>
+                    <option value="resolved">Resolved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Admin Note</label>
+                <textarea id="adminNoteInput" class="form-input" style="height: 80px;" placeholder="Add internal or public note..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Assign Department</label>
+                <select id="assignDept" class="form-input">
+                    <option value="">Select Dept</option>
+                    <option value="PWD">PWD (Roads)</option>
+                    <option value="Sanitation">Sanitation Dept</option>
+                    <option value="WaterBoard">Water Board</option>
+                    <option value="BESCOM">Electricity Dept</option>
+                    <option value="Health">Health Dept</option>
+                </select>
+            </div>
+            <button class="btn btn-blue" id="adminSaveBtn">Update & Save</button>
+            <div style="margin-top: 12px; display: flex; gap: 8px;">
+                <button class="btn btn-green btn-sm" id="adminResolveBtn">✅ Resolve</button>
+                <button class="btn btn-clear btn-sm" id="adminRejectBtn" style="background:#fee2e2; border-radius: 8px; text-decoration:none;">❌ Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { GoogleGenAI, Type } from "@google/genai";
+
+        // Gemini API is automatically configured in this environment via process.env.GEMINI_API_KEY
+        const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+        // --- Config & Auth ---
+        const CREDENTIALS = {
+            citizen: [
+                { user: "citizen", pass: "citizen123" },
+                { user: "user1", pass: "pass123" },
+                { user: "user2", pass: "pass456" }
+            ],
+            admin: [
+                { user: "admin", pass: "admin@123" },
+                { user: "superadmin", pass: "super@456" }
+            ]
+        };
+
+        let currentUser = JSON.parse(sessionStorage.getItem('complaint_session'));
+
+        // --- UI View References ---
+        const views = {
+            login: document.getElementById('loginScreen'),
+            citizen: document.getElementById('citizenPortal'),
+            admin: document.getElementById('adminPortal')
+        };
+
+        // --- Core Elements (Shared/Citizen) ---
         const complaintInput = document.getElementById('complaintInput');
         const charCount = document.getElementById('charCount');
         const analyzeBtn = document.getElementById('analyzeBtn');
@@ -600,13 +1561,670 @@
         const resultPanel = document.getElementById('resultPanel');
         const statusPill = document.getElementById('statusPill');
         const errorBox = document.getElementById('errorBox');
-
-        // Result elements
+        const locationInput = document.getElementById('locationInput');
+        const useLocationBtn = document.getElementById('useLocationBtn');
+        const locationCheck = document.getElementById('locationCheck');
+        const toggleHistoryBtn = document.getElementById('toggleHistoryBtn');
+        const historyPanel = document.getElementById('historyPanel');
+        const historyList = document.getElementById('historyList');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const escalationBanner = document.getElementById('escalationBanner');
+        const escalationText = document.getElementById('escalationText');
+        const resultLocation = document.getElementById('resultLocation');
+        const countPending = document.getElementById('countPending');
+        const countOverdue = document.getElementById('countOverdue');
+        const countResolved = document.getElementById('countResolved');
+        const resolveBtn = document.getElementById('resolveBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const timelineEscalated = document.getElementById('timelineEscalated');
+        const timelineResolved = document.getElementById('timelineResolved');
+        const resolvedBadge = document.getElementById('resolvedBadge');
         const resultCategory = document.getElementById('resultCategory');
         const resultPriority = document.getElementById('resultPriority');
         const resultPriorityReason = document.getElementById('resultPriorityReason');
         const resultActions = document.getElementById('resultActions');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadPreview = document.getElementById('uploadPreview');
+        const previewImg = document.getElementById('previewImg');
+        const fileNameDisp = document.getElementById('fileName');
+        const removePhotoBtn = document.getElementById('removePhotoBtn');
+        const photoAnalysisSection = document.getElementById('photoAnalysisSection');
+        const resultPhoto = document.getElementById('resultPhoto');
+        const photoIssue = document.getElementById('photoIssue');
+        const photoSeverity = document.getElementById('photoSeverity');
+        const photoEvidence = document.getElementById('photoEvidence');
+        const photoConfidence = document.getElementById('photoConfidence');
+        const validationBadge = document.getElementById('validationBadge');
+        const validationIcon = document.getElementById('validationIcon');
+        const validationTitle = document.getElementById('validationTitle');
+        const validationSubtext = document.getElementById('validationSubtext');
+        const boostNotice = document.getElementById('boostNotice');
 
+        // Citizen Stats/Track
+        const trackInput = document.getElementById('trackInput');
+        const trackBtn = document.getElementById('trackBtn');
+        const myTotalCmp = document.getElementById('myTotalCmp');
+        const myResolvedCmp = document.getElementById('myResolvedCmp');
+        const avgResTime = document.getElementById('avgResTime');
+
+        // Admin Elements
+        const adminTotal = document.getElementById('adminTotal');
+        const adminPending = document.getElementById('adminPending');
+        const adminOverdue = document.getElementById('adminOverdue');
+        const adminEscalated = document.getElementById('adminEscalated');
+        const adminCritical = document.getElementById('adminCritical');
+        const adminResolved = document.getElementById('adminResolved');
+        const adminSearch = document.getElementById('adminSearch');
+        const filterCategory = document.getElementById('filterCategory');
+        const filterPriority = document.getElementById('filterPriority');
+        const resetFilters = document.getElementById('resetFilters');
+        const tableBody = document.getElementById('tableBody');
+        const detailPanel = document.getElementById('detailPanel');
+        const detailPanelOverlay = document.getElementById('detailPanelOverlay');
+        const detailContent = document.getElementById('detailContent');
+        const closeDetail = document.getElementById('closeDetail');
+        const updateStatusSelect = document.getElementById('updateStatusSelect');
+        const adminNoteInput = document.getElementById('adminNoteInput');
+        const assignDept = document.getElementById('assignDept');
+        const adminSaveBtn = document.getElementById('adminSaveBtn');
+        const adminResolveBtn = document.getElementById('adminResolveBtn');
+        const adminRejectBtn = document.getElementById('adminRejectBtn');
+
+        let currentActiveId = null;
+        let selectedFile = null;
+        let adminFilterStatus = 'all';
+
+        // --- Session & Navigation ---
+        function switchView(viewName) {
+            Object.values(views).forEach(v => v.classList.remove('visible-view', 'flex-view'));
+            if (viewName === 'login') {
+                views.login.classList.add('flex-view');
+            } else {
+                views[viewName].classList.add('visible-view');
+            }
+        }
+
+        window.logout = function() {
+            sessionStorage.removeItem('complaint_session');
+            currentUser = null;
+            switchView('login');
+        };
+
+        function initSession() {
+            if (currentUser) {
+                if (currentUser.role === 'admin') {
+                    document.getElementById('adminName').textContent = currentUser.username;
+                    switchView('admin');
+                    updateAdminDashboard();
+                } else {
+                    document.getElementById('citizenName').textContent = currentUser.username;
+                    switchView('citizen');
+                    renderHistory();
+                    updateDashboard();
+                }
+            } else {
+                switchView('login');
+            }
+        }
+
+        // --- Login Handlers ---
+        document.getElementById('citizenLoginBtn').onclick = () => {
+            const user = document.getElementById('citizenUser').value.trim();
+            const pass = document.getElementById('citizenPass').value.trim();
+            const found = CREDENTIALS.citizen.find(c => c.user === user && c.pass === pass);
+            
+            if (found) {
+                currentUser = { role: 'citizen', username: found.user, loginTime: Date.now() };
+                sessionStorage.setItem('complaint_session', JSON.stringify(currentUser));
+                initSession();
+            } else {
+                showLoginError('citizen');
+            }
+        };
+
+        document.getElementById('adminLoginBtn').onclick = () => {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            const found = CREDENTIALS.admin.find(c => c.user === user && c.pass === pass);
+            
+            if (found) {
+                currentUser = { role: 'admin', username: found.user, loginTime: Date.now() };
+                sessionStorage.setItem('complaint_session', JSON.stringify(currentUser));
+                initSession();
+            } else {
+                showLoginError('admin');
+            }
+        };
+
+        function showLoginError(type) {
+            const err = document.getElementById(type + 'LoginError');
+            const card = document.getElementById(type + 'Card');
+            err.style.display = 'block';
+            card.classList.add('shake');
+            setTimeout(() => {
+                card.classList.remove('shake');
+            }, 500);
+        }
+
+        // --- Photo Upload Logic ---
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!validTypes.includes(file.type)) {
+                alert('Invalid file type. Please upload a JPG, PNG, or WEBP image.');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Photo too large. Please upload an image under 5MB.');
+                return;
+            }
+
+            selectedFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImg.src = e.target.result;
+                fileNameDisp.textContent = file.name;
+                uploadArea.style.display = 'none';
+                uploadPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        removePhotoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectedFile = null;
+            fileInput.value = '';
+            uploadArea.style.display = 'flex';
+            uploadPreview.style.display = 'none';
+        });
+
+        async function compressImage(file, maxWidth = 400) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                img.onload = () => {
+                    const ratio = Math.min(maxWidth / img.width, 1);
+                    canvas.width = img.width * ratio;
+                    canvas.height = img.height * ratio;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL('image/jpeg', 0.7));
+                };
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        // --- History Logic ---
+        function getHistory() {
+            try {
+                let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+                const fortyEightHrs = 48 * 60 * 60 * 1000;
+                const now = Date.now();
+                
+                // Processing for admin views or citizen's own
+                let filtered = history;
+                if (currentUser && currentUser.role === 'citizen') {
+                    filtered = history.filter(item => item.citizenUsername === currentUser.username);
+                }
+
+                return filtered.map(item => {
+                    if (item.status !== 'resolved' && (now - item.id) > fortyEightHrs) {
+                        item.isOverdue = true;
+                        // Escalation logic matches existing
+                    }
+                    return item;
+                });
+            } catch { return []; }
+        }
+
+        function updateDashboard() {
+            const history = getHistory();
+            const resolved = history.filter(i => i.status === 'resolved').length;
+            const overdue = history.filter(i => i.isOverdue && i.status !== 'resolved').length;
+            const pending = history.filter(i => i.status === 'pending').length;
+
+            countPending.textContent = pending;
+            countOverdue.textContent = overdue;
+            countResolved.textContent = resolved;
+
+            // Citizen Specific Stats
+            myTotalCmp.textContent = history.length;
+            myResolvedCmp.textContent = resolved;
+            
+            if (resolved > 0) {
+                const resItems = history.filter(i => i.status === 'resolved' && i.resolvedAt);
+                if (resItems.length > 0) {
+                    const totalDays = resItems.reduce((acc, item) => acc + (item.resolvedAt - item.id), 0);
+                    const avg = totalDays / (resItems.length * 24 * 60 * 60 * 1000);
+                    avgResTime.textContent = avg.toFixed(1);
+                } else {
+                    avgResTime.textContent = "0";
+                }
+            } else {
+                avgResTime.textContent = "0";
+            }
+        }
+
+        function saveToHistory(entry) {
+            try {
+                let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+                entry.citizenUsername = currentUser.username;
+                entry.complaintId = generateComplaintId();
+                history.unshift(entry);
+                localStorage.setItem('complaints', JSON.stringify(history));
+                renderHistory();
+                updateDashboard();
+            } catch (e) {
+                console.error('Failed to save history:', e);
+            }
+        }
+
+        function generateComplaintId() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const md = String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0');
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            return `CMP-${y}-${md}-${rand}`;
+        }
+
+        function updateHistoryItem(id, updates) {
+            let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            const index = history.findIndex(i => i.id === id);
+            if (index !== -1) {
+                if (updates.status === 'resolved' && history[index].status !== 'resolved') {
+                    updates.resolvedAt = Date.now();
+                }
+                history[index] = { ...history[index], ...updates };
+                localStorage.setItem('complaints', JSON.stringify(history));
+                renderHistory();
+                updateDashboard();
+            }
+        }
+
+        function deleteHistoryItem(id) {
+            let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            history = history.filter(item => item.id !== id);
+            localStorage.setItem('complaints', JSON.stringify(history));
+            renderHistory();
+            updateDashboard();
+        }
+
+        function clearAllHistory() {
+            if (confirm('Clear all complaint history?')) {
+                localStorage.removeItem('complaints');
+                renderHistory();
+                updateDashboard();
+            }
+        }
+
+        function renderHistory() {
+            const history = getHistory();
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="subtext" style="text-align: center; margin-top: 20px;">No complaints submitted yet.</p>';
+                return;
+            }
+
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'history-card';
+                card.id = `card-${item.complaintId}`;
+                
+                const timeStr = new Date(item.id).toLocaleString();
+                const snippet = item.complaint.substring(0, 80) + (item.complaint.length > 80 ? '...' : '');
+                const isEscalated = item.isEscalated || item.isOverdue;
+                const isResolved = item.status === 'resolved';
+
+                card.innerHTML = `
+                    <div class="history-card-top">
+                        <span style="font-weight:800; color:var(--primary-blue)">${item.complaintId}</span>
+                        <span>${timeStr} ${isResolved ? '✅' : ''}</span>
+                        ${isEscalated && !isResolved ? '<span class="flame-icon">🔥 OVERDUE</span>' : ''}
+                    </div>
+                    <div class="history-card-body" style="margin-top:8px;">
+                        ${item.photo ? `<img src="${item.photo}" class="history-thumb" alt="Evidence">` : ''}
+                        <div class="history-main">
+                            <div class="history-card-content">
+                                ${snippet}
+                            </div>
+                            <div class="history-card-pills">
+                                <span class="pill pill-waste">${item.category}</span>
+                                <span class="pill pill-priority priority-${item.priority.toLowerCase()}">${item.priority}</span>
+                                <span class="pill" style="background:#f1f5f9; color:#64748b;">${item.status}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-card-actions">
+                        <button class="btn btn-sm btn-view" data-id="${item.id}">View Details</button>
+                        <button class="btn btn-sm btn-delete" data-id="${item.id}">🗑️</button>
+                    </div>
+                `;
+                historyList.appendChild(card);
+            });
+
+            historyList.querySelectorAll('.btn-view').forEach(btn => {
+                btn.onclick = () => viewHistoryItem(parseInt(btn.getAttribute('data-id')));
+            });
+            historyList.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.onclick = () => deleteHistoryItem(parseInt(btn.getAttribute('data-id')));
+            });
+        }
+
+        function viewHistoryItem(id) {
+            const item = getHistory().find(i => i.id === id);
+            if (item) {
+                currentActiveId = id;
+                displayResults(item, true);
+                resultPanel.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- Admin Logic ---
+        window.updateAdminDashboard = function() {
+            const history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            
+            const stats = {
+                total: history.length,
+                pending: history.filter(i => i.status === 'pending').length,
+                overdue: history.filter(i => i.isOverdue && i.status !== 'resolved').length,
+                escalated: history.filter(i => i.isEscalated).length,
+                critical: history.filter(i => i.priority === 'Critical').length,
+                resolved: history.filter(i => i.status === 'resolved').length
+            };
+
+            adminTotal.textContent = stats.total;
+            adminPending.textContent = stats.pending;
+            adminOverdue.textContent = stats.overdue;
+            adminEscalated.textContent = stats.escalated;
+            adminCritical.textContent = stats.critical;
+            adminResolved.textContent = stats.resolved;
+
+            renderAdminTable();
+        };
+
+        function renderAdminTable() {
+            const history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            const search = adminSearch.value.toLowerCase();
+            const cat = filterCategory.value;
+            const prio = filterPriority.value;
+
+            const filtered = history.filter(item => {
+                const matchesSearch = item.complaintId.toLowerCase().includes(search) || 
+                                       item.citizenUsername.toLowerCase().includes(search) ||
+                                       item.complaint.toLowerCase().includes(search) ||
+                                       (item.location && item.location.toLowerCase().includes(search));
+                const matchesCat = cat === 'all' || item.category === cat;
+                const matchesPrio = prio === 'all' || item.priority === prio;
+                const matchesStat = adminFilterStatus === 'all' || 
+                                    (adminFilterStatus === 'pending' && item.status === 'pending') ||
+                                    (adminFilterStatus === 'overdue' && item.isOverdue && item.status !== 'resolved') ||
+                                    (adminFilterStatus === 'escalated' && item.isEscalated) ||
+                                    (adminFilterStatus === 'critical' && item.priority === 'Critical') ||
+                                    (adminFilterStatus === 'resolved' && item.status === 'resolved');
+
+                return matchesSearch && matchesCat && matchesPrio && matchesStat;
+            });
+
+            tableBody.innerHTML = '';
+            filtered.forEach((item, index) => {
+                const daysOpen = Math.floor((Date.now() - item.id) / (1000 * 60 * 60 * 24));
+                const dayClass = daysOpen > 5 ? 'stat-overdue' : (daysOpen > 2 ? 'stat-pending' : 'stat-resolved');
+                
+                const tr = document.createElement('tr');
+                if (item.priority === 'Critical') tr.style.borderLeft = '4px solid #ef4444';
+                if (item.status === 'resolved') tr.style.opacity = '0.7';
+
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td style="font-weight:700; color:var(--primary-blue)">${item.complaintId}</td>
+                    <td>${item.citizenUsername}</td>
+                    <td><span class="pill pill-waste">${item.category}</span></td>
+                    <td><span class="pill pill-priority priority-${item.priority.toLowerCase()} ${item.priority === 'Critical' ? 'pulse' : ''}">${item.priority}</span></td>
+                    <td><span class="status-badge badge-${item.status}">${item.status.toUpperCase()}</span></td>
+                    <td class="${dayClass}" style="font-weight:700">${daysOpen} days</td>
+                    <td>${item.photo ? '📷' : '—'}</td>
+                    <td>
+                        <button class="btn btn-blue btn-sm" onclick="event.stopPropagation(); openDetailPanel('${item.id}')">View</button>
+                    </td>
+                `;
+                tr.onclick = () => openDetailPanel(item.id);
+                tableBody.appendChild(tr);
+            });
+        }
+
+        window.openDetailPanel = function(id) {
+            const history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            const item = history.find(i => i.id == id);
+            if (!item) return;
+
+            currentActiveId = id;
+            detailContent.innerHTML = `
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 24px; font-weight: 800; color: var(--primary-blue); margin-bottom: 4px;">${item.complaintId}</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="status-badge badge-${item.status}">${item.status.toUpperCase()}</span>
+                        <span class="subtext">${new Date(item.id).toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 8px;">Citizen Info</h4>
+                    <div style="font-weight: 700;">👤 ${item.citizenUsername}</div>
+                </div>
+
+                ${item.photo ? `<img src="${item.photo}" style="width: 100%; border-radius: 12px; margin-bottom: 16px;">` : ''}
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 8px;">Complaint Text</h4>
+                    <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; font-size: 14px;">${item.complaint}</div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+                    <div>
+                        <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 4px;">Category</h4>
+                        <div class="pill pill-waste" style="width: 100%; text-align: center;">${item.category}</div>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 4px;">Priority</h4>
+                        <div class="pill pill-priority priority-${item.priority.toLowerCase()}" style="width: 100%; text-align: center;">${item.priority}</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 8px;">Location</h4>
+                    <div style="font-size: 13px;">📍 ${item.location || 'Not specified'}</div>
+                </div>
+
+                ${item.photo_analysis ? `
+                <div style="margin-bottom: 24px; padding: 16px; background: #eff6ff; border-radius: 12px; border: 1px solid #dbeafe;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; color: var(--primary-blue); margin-bottom: 8px;">AI Visual Analysis</h4>
+                    <div style="font-size: 13px; margin-bottom: 4px;"><strong>Issue:</strong> ${item.photo_analysis.issue_detected}</div>
+                    <div style="font-size: 11px; color: #1e40af;"><strong>Evidence:</strong> ${item.photo_analysis.visual_evidence}</div>
+                </div>
+                ` : ''}
+                
+                <div style="margin-bottom: 24px;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 8px;">Timeline & Updates</h4>
+                    <div style="font-size: 12px;">
+                        ${item.updates ? item.updates.map(u => `
+                            <div style="margin-bottom: 12px; border-left: 2px solid #e2e8f0; padding-left: 12px;">
+                                <div style="font-weight: 700;">${u.title}</div>
+                                <div style="color: var(--text-gray);">${u.message}</div>
+                                <div style="font-size: 10px; opacity: 0.6; margin-top: 2px;">${new Date(u.timestamp || item.id).toLocaleString()}</div>
+                            </div>
+                        `).join('') : '<div style="opacity:0.6 italic">Initial submission - Waiting for review.</div>'}
+                    </div>
+                </div>
+            `;
+
+            updateStatusSelect.value = item.status;
+            adminNoteInput.value = '';
+            assignDept.value = item.assignedDepartment || '';
+            
+            detailPanel.classList.add('active');
+            detailPanelOverlay.style.display = 'block';
+        };
+
+        closeDetail.onclick = () => {
+            detailPanel.classList.remove('active');
+            detailPanelOverlay.style.display = 'none';
+        };
+
+        detailPanelOverlay.onclick = closeDetail.onclick;
+
+        adminSaveBtn.onclick = () => {
+            let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            const idx = history.findIndex(i => i.id == currentActiveId);
+            if (idx === -1) return;
+
+            const oldStatus = history[idx].status;
+            const newStatus = updateStatusSelect.value;
+            const note = adminNoteInput.value.trim();
+
+            if (note) {
+                if (!history[idx].updates) history[idx].updates = [];
+                history[idx].updates.push({
+                    title: `Official Update 🔖 (by ${currentUser.username})`,
+                    message: note,
+                    timestamp: Date.now()
+                });
+            }
+
+            if (newStatus === 'resolved' && oldStatus !== 'resolved') {
+                history[idx].resolvedAt = Date.now();
+            }
+
+            history[idx].status = newStatus;
+            history[idx].assignedDepartment = assignDept.value;
+            history[idx].updatedAt = Date.now();
+
+            localStorage.setItem('complaints', JSON.stringify(history));
+            updateAdminDashboard();
+            closeDetail.onclick();
+        };
+
+        adminResolveBtn.onclick = () => {
+            updateStatusSelect.value = 'resolved';
+            adminSaveBtn.click();
+        };
+
+        adminRejectBtn.onclick = () => {
+            const reason = prompt("Enter reason for rejection:");
+            if (!reason) return;
+            
+            let history = JSON.parse(localStorage.getItem('complaints') || '[]');
+            const idx = history.findIndex(i => i.id == currentActiveId);
+            if (idx === -1) return;
+
+            history[idx].status = 'rejected';
+            history[idx].rejectionReason = reason;
+            if (!history[idx].updates) history[idx].updates = [];
+            history[idx].updates.push({
+                title: `Complaint Rejected ❌`,
+                message: `Reason: ${reason}`,
+                timestamp: Date.now()
+            });
+
+            localStorage.setItem('complaints', JSON.stringify(history));
+            updateAdminDashboard();
+            closeDetail.onclick();
+        };
+
+        // --- Admin Filtering Listeners ---
+        adminSearch.oninput = renderAdminTable;
+        filterCategory.onchange = renderAdminTable;
+        filterPriority.onchange = renderAdminTable;
+        resetFilters.onclick = () => {
+            adminSearch.value = '';
+            filterCategory.value = 'all';
+            filterPriority.value = 'all';
+            adminFilterStatus = 'all';
+            document.querySelectorAll('.admin-stat-card').forEach(c => c.classList.remove('active'));
+            document.querySelector('[data-filter="all"]').classList.add('active');
+            renderAdminTable();
+        };
+
+        resolveBtn.addEventListener('click', () => {
+            if (currentActiveId) {
+                updateHistoryItem(currentActiveId, { status: 'resolved' });
+                const item = getHistory().find(i => i.id === currentActiveId);
+                displayResults(item, true);
+            }
+        });
+
+        emailBtn.addEventListener('click', () => {
+            if (!currentActiveId) return;
+            const item = getHistory().find(i => i.id === currentActiveId);
+            const subject = encodeURIComponent(`URGENT: ${item.category} Unresolved Issue - ${item.location || 'Local Area'}`);
+            const body = encodeURIComponent(`Dear Municipal Department,\n\nI am formally escalating an unresolved issue regarding ${item.category}.\n\nLocation: ${item.location}\nComplaint: ${item.complaint}\n\nReported on: ${new Date(item.id).toLocaleString()}\nStatus: UNRESOLVED / OVERDUE\n\nImmediate attention is requested.\n\nRegards,\nConcerned Citizen`);
+            window.open(`mailto:commissioner@municipality.gov?subject=${subject}&body=${body}`);
+        });
+
+        toggleHistoryBtn.addEventListener('click', () => {
+            historyPanel.classList.toggle('active');
+            if (historyPanel.classList.contains('active')) renderHistory();
+        });
+
+        clearHistoryBtn.addEventListener('click', clearAllHistory);
+
+        // --- Location Logic ---
+        useLocationBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser');
+                return;
+            }
+
+            useLocationBtn.textContent = '⏳';
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const { latitude, longitude } = position.coords;
+                try {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+                    const data = await res.json();
+                    locationInput.value = data.display_name;
+                    locationCheck.style.display = 'block';
+                } catch (err) {
+                    console.error('Geocoding error:', err);
+                    alert('Failed to get address. Please enter manually.');
+                } finally {
+                    useLocationBtn.textContent = '📍';
+                }
+            }, (err) => {
+                console.error('Geolocation error:', err);
+                alert('Location access denied. Enter manually.');
+                useLocationBtn.textContent = '📍';
+            });
+        });
+
+        locationInput.addEventListener('input', () => {
+            locationCheck.style.display = locationInput.value ? 'block' : 'none';
+        });
+
+        // --- Core Analysis Logic (Gemini) ---
         complaintInput.addEventListener('input', () => {
             const length = complaintInput.value.length;
             charCount.textContent = `${length}/500`;
@@ -614,30 +2232,145 @@
 
         analyzeBtn.addEventListener('click', async () => {
             const complaint = complaintInput.value.trim();
-            if (!complaint) return;
+            const location = locationInput.value.trim();
+            if (!complaint && !selectedFile) return;
 
             setLoading(true);
             errorBox.style.display = 'none';
+            escalationBanner.style.display = 'none';
+            photoAnalysisSection.style.display = 'none';
 
             try {
-                const response = await fetch('/api/analyze', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ complaint })
-                });
+                let photoData = null;
+                let multimodalContent = [];
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || errorData.message || 'Analysis failed');
+                if (selectedFile) {
+                    const base64Promise = new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result.split(',')[1]);
+                        reader.readAsDataURL(selectedFile);
+                    });
+                    
+                    const base64Data = await base64Promise;
+                    multimodalContent.push({
+                        inlineData: {
+                            data: base64Data,
+                            mimeType: selectedFile.type
+                        }
+                    });
+
+                    // Pre-compress for history
+                    photoData = await compressImage(selectedFile);
                 }
 
-                const result = await response.json();
+                const textPrompt = `You are a civic complaint analyzer for Indian municipalities.
+                
+                ${selectedFile ? "Analyze BOTH the photo and the complaint text together. Photo: Examine what civic issue is visible in this image. Look for: road damage, garbage, waterlogging, broken infrastructure, encroachment, fallen trees, damaged streetlights, open drains, or any other civic problem." : ""}
+                
+                Complaint text: ${complaint || "User has provided a photo only. Please describe the issue from the photo."}
+                Location: ${location || 'Not specified'}
+                
+                Return JSON.`;
+
+                multimodalContent.push({ text: textPrompt });
+
+                const response = await genAI.models.generateContent({
+                    model: "gemini-3-flash-preview",
+                    contents: [{ role: "user", parts: multimodalContent }],
+                    config: {
+                        systemInstruction: "Return a valid JSON object. If a photo is provided, include a 'photo_analysis' object.",
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: Type.OBJECT,
+                            properties: {
+                                category: { type: Type.STRING },
+                                priority: { type: Type.STRING, enum: ["Critical", "High", "Medium", "Low"] },
+                                priority_reason: { type: Type.STRING },
+                                actions: { type: Type.ARRAY, items: { type: Type.STRING }, minItems: 4, maxItems: 4 },
+                                photo_analysis: {
+                                    type: Type.OBJECT,
+                                    properties: {
+                                        issue_detected: { type: Type.STRING },
+                                        severity_from_photo: { type: Type.STRING, enum: ["Critical", "High", "Medium", "Low"] },
+                                        photo_matches_complaint: { type: Type.BOOLEAN },
+                                        visual_evidence: { type: Type.STRING },
+                                        confidence: { type: Type.STRING, enum: ["High", "Medium", "Low"] }
+                                    },
+                                    required: ["issue_detected", "severity_from_photo", "photo_matches_complaint", "visual_evidence", "confidence"]
+                                }
+                            },
+                            required: ["category", "priority", "priority_reason", "actions"]
+                        }
+                    }
+                });
+
+                if (!response.text) {
+                    throw new Error("No response from AI engine.");
+                }
+
+                let result = JSON.parse(response.text);
+
+                // If complaint was empty, pre-fill text area from analysis
+                if (!complaint && result.photo_analysis) {
+                    complaintInput.value = result.photo_analysis.issue_detected;
+                    charCount.textContent = `${complaintInput.value.length}/500`;
+                    result.complaint = result.photo_analysis.issue_detected;
+                } else {
+                    result.complaint = complaint;
+                }
+                
+                // Priority Boost Logic
+                const priorityOrder = { "Low": 0, "Medium": 1, "High": 2, "Critical": 3 };
+                if (result.photo_analysis && priorityOrder[result.photo_analysis.severity_from_photo] > priorityOrder[result.priority]) {
+                    result.originalPriority = result.priority;
+                    result.priority = result.photo_analysis.severity_from_photo;
+                    result.priorityBoosted = true;
+                }
+                
+                // --- Escalation Logic (History Check) ---
+                const history = getHistory();
+                const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+                
+                const matches = history.filter(item => {
+                    if (item.id < thirtyDaysAgo) return false;
+                    if (item.category.toLowerCase() !== result.category.toLowerCase()) return false;
+                    if (!location || !item.location) return false;
+                    return item.location.substring(0, 20).toLowerCase() === location.substring(0, 20).toLowerCase();
+                });
+
+                const count = matches.length + 1;
+                result.submissionCount = count;
+                result.location = location || null;
+                result.status = 'pending';
+                result.id = Date.now();
+                result.photo = photoData;
+                result.photoName = selectedFile ? selectedFile.name : null;
+
+                if (count >= 2) {
+                    result.isEscalated = true;
+                    if (count === 2 && priorityOrder[result.priority] < 2) result.priority = 'High';
+                    if (count >= 3) result.priority = 'Critical';
+                    
+                    const note = count >= 4 ? "Repeat Issue — Urgent Attention Required" : `Issue reported ${count} times in this area recently.`;
+                    result.escalationNote = note;
+                    
+                    result.actions.unshift(`Escalation alert: Multiple complaints received — immediate review required.`);
+                    if (result.actions.length > 4) result.actions.pop();
+                }
+
+                currentActiveId = result.id;
                 displayResults(result);
+                saveToHistory(result);
+
+                // Reset upload
+                selectedFile = null;
+                fileInput.value = '';
+                uploadArea.style.display = 'flex';
+                uploadPreview.style.display = 'none';
+
             } catch (err) {
                 console.error(err);
-                errorBox.textContent = "Error: " + (err.message || "Failed to analyze complaint. Check your API key.");
+                errorBox.textContent = "Error: " + (err.message || "Failed to analyze complaint.");
                 errorBox.style.display = 'block';
             } finally {
                 setLoading(false);
@@ -650,22 +2383,74 @@
                 btnIcon.innerHTML = '<div class="spinner"></div>';
                 btnText.textContent = 'Processing...';
                 statusPill.classList.remove('active');
+                resultPanel.classList.remove('visible');
             } else {
                 btnIcon.textContent = '✈️';
                 btnText.textContent = 'Analyze Complaint';
             }
         }
 
-        function displayResults(data) {
+        function displayResults(data, fromHistory = false) {
+            // Update Title with ID
+            const resultTitle = resultPanel.querySelector('h2') || document.createElement('h2');
+            resultTitle.innerHTML = `Action Verification Dashboard <span style="font-size: 14px; opacity: 0.6; font-weight: 400; margin-left: 8px;">ID: ${data.complaintId}</span>`;
+            if (!resultPanel.querySelector('h2')) resultPanel.prepend(resultTitle);
+
             resultCategory.textContent = data.category;
             resultPriority.textContent = data.priority;
             resultPriorityReason.textContent = data.priority_reason;
+            resultLocation.textContent = data.location || 'No location specified';
             
             // Set priority color
+            resultPriority.className = 'pill pill-priority';
             const p = data.priority.toLowerCase();
-            if (p === 'high') resultPriority.style.backgroundColor = 'var(--priority-high)';
+            if (p === 'critical') resultPriority.classList.add('priority-critical');
+            else if (p === 'high') resultPriority.style.backgroundColor = 'var(--priority-high)';
             else if (p === 'medium') resultPriority.style.backgroundColor = 'var(--priority-medium)';
             else resultPriority.style.backgroundColor = 'var(--priority-low)';
+
+            // Photo Analysis Display
+            if (data.photo || data.photo_analysis) {
+                photoAnalysisSection.style.display = 'block';
+                if (data.photo) resultPhoto.src = data.photo;
+                
+                if (data.photo_analysis) {
+                    const pa = data.photo_analysis;
+                    photoIssue.textContent = pa.issue_detected;
+                    photoEvidence.textContent = pa.visual_evidence;
+                    photoSeverity.textContent = pa.severity_from_photo;
+                    
+                    // Severity pill color
+                    photoSeverity.className = 'pill pill-priority';
+                    const sp = pa.severity_from_photo.toLowerCase();
+                    if (sp === 'critical') photoSeverity.classList.add('priority-critical');
+                    else if (sp === 'high') photoSeverity.style.backgroundColor = 'var(--priority-high)';
+                    else if (sp === 'medium') photoSeverity.style.backgroundColor = 'var(--priority-medium)';
+                    else photoSeverity.style.backgroundColor = 'var(--priority-low)';
+
+                    // Confidence pill
+                    photoConfidence.textContent = pa.confidence;
+                    photoConfidence.className = `confidence-pill conf-${pa.confidence.toLowerCase()}`;
+
+                    // Validation Badge
+                    if (pa.photo_matches_complaint) {
+                        validationBadge.className = 'validation-badge badge-match';
+                        validationIcon.textContent = '✅';
+                        validationTitle.textContent = 'Photo validates complaint';
+                        validationSubtext.textContent = 'Visual evidence matches reported issue';
+                    } else {
+                        validationBadge.className = 'validation-badge badge-mismatch';
+                        validationIcon.textContent = '⚠️';
+                        validationTitle.textContent = 'Photo mismatch detected';
+                        validationSubtext.textContent = 'Uploaded photo may not match the reported issue';
+                    }
+
+                    // Boost notice
+                    boostNotice.style.display = data.priorityBoosted ? 'flex' : 'none';
+                }
+            } else {
+                photoAnalysisSection.style.display = 'none';
+            }
 
             // Set actions
             resultActions.innerHTML = '';
@@ -676,10 +2461,54 @@
                 resultActions.appendChild(li);
             });
 
+            // Timeline & Esc banners
+            const isEscalated = data.isEscalated || data.isOverdue;
+            timelineEscalated.className = `step-dot ${isEscalated ? (data.isOverdue ? 'overdue' : 'active') : ''}`;
+            timelineResolved.className = `step-dot ${data.status === 'resolved' ? 'active' : ''}`;
+            
+            resolvedBadge.style.display = data.status === 'resolved' ? 'block' : 'none';
+            resolveBtn.style.display = data.status === 'resolved' ? 'none' : 'block';
+            emailBtn.style.display = (isEscalated && data.status !== 'resolved') ? 'block' : 'none';
+
+            if (isEscalated && data.status !== 'resolved') {
+                escalationBanner.style.display = 'flex';
+                escalationText.textContent = data.escalationNote || `This is complaint #${data.submissionCount} for ${data.category} in this area within 30 days.`;
+            } else {
+                escalationBanner.style.display = 'none';
+            }
+
             // Show panels
             resultPanel.classList.add('visible');
             statusPill.classList.add('active');
         }
+
+        // --- Track Logic ---
+        trackBtn.onclick = () => {
+            const id = trackInput.value.trim().toUpperCase();
+            if (!id) return;
+            const history = getHistory();
+            const item = history.find(i => i.complaintId === id);
+            if (item) {
+                if (!historyPanel.classList.contains('active')) toggleHistoryBtn.click();
+                setTimeout(() => {
+                    const card = document.getElementById(`card-${item.complaintId}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth' });
+                        card.style.borderColor = 'var(--primary-blue)';
+                        card.style.boxShadow = '0 0 20px rgba(37, 99, 235, 0.2)';
+                        setTimeout(() => {
+                            card.style.borderColor = 'transparent';
+                            card.style.boxShadow = 'none';
+                        }, 3000);
+                    }
+                }, 400);
+            } else {
+                alert("Complaint ID not found.");
+            }
+        };
+
+        // Initial Load
+        initSession();
     </script>
 </body>
 </html>
