@@ -1,13 +1,685 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint to Action Converter – AI Agent</title>
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-green: #16a34a;
+            --primary-purple: #7c3aed;
+            --bg-blue: #eff6ff;
+            --bg-green: #f0fdf4;
+            --bg-purple: #f5f3ff;
+            --priority-high: #ef4444;
+            --priority-medium: #f97316;
+            --priority-low: #3b82f6;
+            --text-gray: #6b7280;
+            --text-dark: #1f2937;
+            --page-bg: #f0f4f8;
+            --border-blue: #bfdbfe;
+            --border-green: #bbf7d0;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-left {
+            border: 1px solid var(--border-blue);
+        }
+
+        .card-right {
+            border: 1px solid var(--border-green);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .card-right.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            items-center: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .icon-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+
+        .bg-blue { background-color: var(--primary-blue); }
+        .bg-green { background-color: var(--primary-green); }
+        .bg-purple { background-color: var(--primary-purple); }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .text-blue { color: var(--primary-blue); }
+        .text-green { color: var(--primary-green); }
+
+        .subtext {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            resize: none;
+            font-family: inherit;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-blue { background-color: var(--primary-blue); color: white; }
+        .btn-green { background-color: var(--primary-green); color: white; border: none; }
+
+        .tip-box {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: var(--bg-blue);
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        /* Robot Styles */
+        .agent-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bubble {
+            background-color: var(--bg-purple);
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 280px;
+            position: relative;
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--bg-purple);
+        }
+
+        .robot-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .process-circle {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 50%;
+        }
+
+        .process-label {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .label-tl { top: 0; left: -20px; }
+        .label-tr { top: 0; right: -20px; }
+        .label-bl { bottom: 0; left: -20px; }
+        .label-br { bottom: 0; right: -20px; }
+
+        .robot {
+            width: 140px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .robot-head {
+            width: 90px;
+            height: 70px;
+            background-color: #334155;
+            border-radius: 18px;
+            position: relative;
+            margin-bottom: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .eyes {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 8px;
+        }
+
+        .eye {
+            width: 12px;
+            height: 12px;
+            background-color: #22d3ee;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22d3ee;
+        }
+
+        .smile {
+            width: 30px;
+            height: 4px;
+            background-color: #22d3ee;
+            border-radius: 2px;
+        }
+
+        .robot-body {
+            width: 110px;
+            height: 100px;
+            background-color: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+        }
+
+        .shield {
+            width: 40px;
+            height: 45px;
+            background-color: var(--primary-blue);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+        }
+
+        .status-pill {
+            margin-top: 30px;
+            padding: 8px 16px;
+            background-color: var(--bg-green);
+            color: var(--primary-green);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            visibility: hidden;
+        }
+
+        .status-pill.active { visibility: visible; }
+
+        /* Results Display */
+        .result-section {
+            margin-bottom: 24px;
+        }
+
+        .label-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .pill-waste { background-color: var(--bg-green); color: var(--primary-green); }
+        .pill-priority { color: white; }
+
+        .action-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .action-list li {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .action-list li::before {
+            content: attr(data-index);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .footer-ready {
+            border-top: 1px solid #eff6ff;
+            padding-top: 16px;
+            margin-top: auto;
+        }
+
+        .ready-text {
+            color: var(--primary-green);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Bottom Bar */
+        .bottom-bar {
+            background-color: #f5f3ff;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .bottom-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .steps-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: auto;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .step-icon { font-size: 20px; }
+        .step-text { font-size: 13px; font-weight: 600; color: var(--text-dark); text-align: center; }
+
+        .arrow { color: #d1d5db; font-size: 18px; }
+
+        /* Utilities */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .error-msg {
+            color: var(--priority-high);
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Complaint to Action Converter – AI Agent</h1>
+        </header>
+
+        <div class="main-grid">
+            <!-- Left Panel -->
+            <div class="card card-left">
+                <div class="section-header">
+                    <div class="icon-circle bg-blue">i</div>
+                    <h2 class="section-title text-blue">1. Complaint Input</h2>
+                </div>
+                <p class="subtext">Enter a complaint in your own words.</p>
+                
+                <textarea id="complaintInput" placeholder="Describe the issue here..." maxlength="500"></textarea>
+                <div class="char-count" id="charCount">0/500</div>
+                
+                <button class="btn btn-blue" id="analyzeBtn">
+                    <span id="btnIcon">✈️</span>
+                    <span id="btnText">Analyze Complaint</span>
+                </button>
+                
+                <div id="errorBox" class="error-msg"></div>
+
+                <div class="tip-box">
+                    <span>💡</span>
+                    <span>Provide as much detail as possible for better results.</span>
+                </div>
+            </div>
+
+            <!-- Center Panel -->
+            <div class="agent-container">
+                <div class="bubble">
+                    Hello! I'm your AI Agent. I analyze complaints and convert them into actions.
+                </div>
+                
+                <div class="robot-wrapper">
+                    <div class="process-circle"></div>
+                    
+                    <div class="process-label label-tl">📄 Understand Complaint</div>
+                    <div class="process-label label-tr">🚀 Assign Priority</div>
+                    <div class="process-label label-bl">🏷️ Detect Category</div>
+                    <div class="process-label label-br">✅ Suggest Actions</div>
+
+                    <div class="robot">
+                        <div class="robot-head">
+                            <div class="eyes">
+                                <div class="eye"></div>
+                                <div class="eye"></div>
+                            </div>
+                            <div class="smile"></div>
+                        </div>
+                        <div class="robot-body">
+                            <div class="shield"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-pill" id="statusPill">
+                    <span id="statusIcon">✔️</span>
+                    <span>Analysis Complete</span>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="card card-right" id="resultPanel">
+                <div class="section-header">
+                    <div class="icon-circle bg-green">i</div>
+                    <h2 class="section-title text-green">2. Analysis Result</h2>
+                </div>
+                <p class="subtext">Structured output ready for action.</p>
+
+                <div class="result-section">
+                    <div class="label-group">
+                        <span style="color: var(--primary-green)">🏷️</span>
+                        <span>Category</span>
+                    </div>
+                    <div class="pill pill-waste" id="resultCategory">Waste Management</div>
+                </div>
+
+                <div class="result-section">
+                    <div class="label-group">
+                        <span style="color: #f97316">🚀</span>
+                        <span>Priority</span>
+                    </div>
+                    <div>
+                        <div class="pill pill-priority" id="resultPriority">High</div>
+                        <p class="subtext" style="margin-top: 8px; margin-bottom: 0;" id="resultPriorityReason">Issue is urgent and affects public health.</p>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <div class="label-group">
+                        <span style="color: var(--primary-blue)">✅</span>
+                        <span>Suggested Actions</span>
+                    </div>
+                    <ul class="action-list" id="resultActions">
+                        <li data-index="1. ">Notify the sanitation department</li>
+                        <li data-index="2. ">Schedule immediate garbage collection</li>
+                        <li data-index="3. ">Inspect the area for cleanliness</li>
+                        <li data-index="4. ">Monitor the area regularly</li>
+                    </ul>
+                </div>
+
+                <div class="footer-ready">
+                    <div class="ready-text">
+                        <span>✔️</span> Ready to Act!
+                    </div>
+                    <p class="subtext" style="margin-top: 4px;">This complaint has been converted into actionable steps.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="bottom-bar">
+            <div class="bottom-header">
+                <span>⭐</span>
+                <span>How I Work</span>
+            </div>
+            <div class="steps-flow">
+                <div class="step-item">
+                    <div class="step-icon">💬</div>
+                    <div class="step-text">Receive Complaint</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step-item">
+                    <div class="step-icon">🧠</div>
+                    <div class="step-text">Understand & Analyze</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step-item">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-text">Classify & Prioritize</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step-item">
+                    <div class="step-icon">✅</div>
+                    <div class="step-text">Suggest Actions</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step-item">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-text">Ready for Action</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Analysis is performed server-side via /api/analyze to avoid CORS issues
+        // Ensure ANTHROPIC_API_KEY is set in your environment variables.
+
+        const complaintInput = document.getElementById('complaintInput');
+        const charCount = document.getElementById('charCount');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const btnIcon = document.getElementById('btnIcon');
+        const btnText = document.getElementById('btnText');
+        const resultPanel = document.getElementById('resultPanel');
+        const statusPill = document.getElementById('statusPill');
+        const errorBox = document.getElementById('errorBox');
+
+        // Result elements
+        const resultCategory = document.getElementById('resultCategory');
+        const resultPriority = document.getElementById('resultPriority');
+        const resultPriorityReason = document.getElementById('resultPriorityReason');
+        const resultActions = document.getElementById('resultActions');
+
+        complaintInput.addEventListener('input', () => {
+            const length = complaintInput.value.length;
+            charCount.textContent = `${length}/500`;
+        });
+
+        analyzeBtn.addEventListener('click', async () => {
+            const complaint = complaintInput.value.trim();
+            if (!complaint) return;
+
+            setLoading(true);
+            errorBox.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ complaint })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || errorData.message || 'Analysis failed');
+                }
+
+                const result = await response.json();
+                displayResults(result);
+            } catch (err) {
+                console.error(err);
+                errorBox.textContent = "Error: " + (err.message || "Failed to analyze complaint. Check your API key.");
+                errorBox.style.display = 'block';
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        function setLoading(loading) {
+            analyzeBtn.disabled = loading;
+            if (loading) {
+                btnIcon.innerHTML = '<div class="spinner"></div>';
+                btnText.textContent = 'Processing...';
+                statusPill.classList.remove('active');
+            } else {
+                btnIcon.textContent = '✈️';
+                btnText.textContent = 'Analyze Complaint';
+            }
+        }
+
+        function displayResults(data) {
+            resultCategory.textContent = data.category;
+            resultPriority.textContent = data.priority;
+            resultPriorityReason.textContent = data.priority_reason;
+            
+            // Set priority color
+            const p = data.priority.toLowerCase();
+            if (p === 'high') resultPriority.style.backgroundColor = 'var(--priority-high)';
+            else if (p === 'medium') resultPriority.style.backgroundColor = 'var(--priority-medium)';
+            else resultPriority.style.backgroundColor = 'var(--priority-low)';
+
+            // Set actions
+            resultActions.innerHTML = '';
+            data.actions.forEach((action, i) => {
+                const li = document.createElement('li');
+                li.setAttribute('data-index', `${i + 1}. `);
+                li.textContent = action;
+                resultActions.appendChild(li);
+            });
+
+            // Show panels
+            resultPanel.classList.add('visible');
+            statusPill.classList.add('active');
+        }
+    </script>
+</body>
+</html>
